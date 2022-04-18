@@ -7,12 +7,12 @@ import TokenBalance from "../components/TokenBalance";
 import useEagerConnect from "../hooks/useEagerConnect";
 
 const DAI_TOKEN_ADDRESS = "0x6b175474e89094c44da98b954eedeac495271d0f";
-const JPYC_TOKEN_ADDRESS = "0x2370f9d504c7a6E775bf6E14B3F12846b594cD53";
-const MATIC_TOKEN_ADDRESS = "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0";
 
 function Home() {
   const { account, library } = useWeb3React();
+
   const triedToEagerConnect = useEagerConnect();
+
   const isConnected = typeof account === "string" && !!library;
 
   return (
