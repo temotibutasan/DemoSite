@@ -1,9 +1,0 @@
-diff a/web/pages/index.tsx b/web/pages/index.tsx	(rejected hunks)
-@@ -7,7 +7,6 @@
- import useEagerConnect from "../hooks/useEagerConnect";
- 
- const DAI_TOKEN_ADDRESS = "0x6b175474e89094c44da98b954eedeac495271d0f";
--const MATIC_TOKEN_ADDRESS = "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0";
- 
- function Home() {
-   const { account, library } = useWeb3React();
