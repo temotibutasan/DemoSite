@@ -3,12 +3,15 @@ import Head from "next/head";
 import Link from "next/link";
 import Account from "../components/Account";
 import ETHBalance from "../components/ETHBalance";
+import ListItmes from "../components/ListItmes";
 import TokenBalance from "../components/TokenBalance";
 import useEagerConnect from "../hooks/useEagerConnect";
 
 const DAI_TOKEN_ADDRESS = "0x6b175474e89094c44da98b954eedeac495271d0f";
-const JPYC_TOKEN_ADDRESS = "0x2370f9d504c7a6E775bf6E14B3F12846b594cD53";
+//const JPYC_TOKEN_ADDRESS = "0x2370f9d504c7a6E775bf6E14B3F12846b594cD53";
+const JPYC_TOKEN_ADDRESS = "0xbD9c419003A36F187DAf1273FCe184e1341362C0";
 const MATIC_TOKEN_ADDRESS = "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0";
+
 
 function Home() {
   const { account, library } = useWeb3React();
@@ -48,22 +51,16 @@ function Home() {
             <TokenBalance tokenAddress={DAI_TOKEN_ADDRESS} symbol="DAI" />
           </section>
         )}
-        <>
-          <h2>応援者：XXXXXXXXXXXXXXXXXXXX</h2>
-          <button
-            onClick={() => {
-              // 送金処理
-            }}
-          >
-            {"送金する"}
-          </button>
-        </>
+        <ListItmes />
       </main>
 
       <style jsx>{`
         nav {
           display: flex;
           justify-content: space-between;
+          height:80px;
+          background-color: black;
+          align-items: center;
         }
 
         main {
