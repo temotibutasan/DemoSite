@@ -6,7 +6,6 @@ import ETHBalance from "../components/ETHBalance";
 import ListItmes from "../components/ListItmes";
 import TokenBalance from "../components/TokenBalance";
 import useEagerConnect from "../hooks/useEagerConnect";
-import styled from "styled-components";
 
 const DAI_TOKEN_ADDRESS = "0x6b175474e89094c44da98b954eedeac495271d0f";
 //const JPYC_TOKEN_ADDRESS = "0x2370f9d504c7a6E775bf6E14B3F12846b594cD53";
@@ -23,14 +22,20 @@ function Home() {
 
   return (
     <div>
+      <Head>
+        <title>next-web3-boilerplate</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-      <MyHeader>
+      <header>
         <nav>
-          <title>next-web3</title>
-          <link rel="icon" href="/favicon.ico" />
+          <Link href="/">
+            <a>next-web3-boilerplate</a>
+          </Link>
+
           <Account triedToEagerConnect={triedToEagerConnect} />
         </nav>
-      </MyHeader>
+      </header>
 
       <main>
         <h1>
@@ -53,6 +58,9 @@ function Home() {
         nav {
           display: flex;
           justify-content: space-between;
+          height:80px;
+          background-color: black;
+          align-items: center;
         }
 
         main {
@@ -64,11 +72,3 @@ function Home() {
 }
 
 export default Home;
-
-const MyHeader = styled.header`
-display: flex;
-align-items: center;
-justify-content: center;
-width: 100%;
-background-color: black;
-`;

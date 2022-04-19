@@ -27,21 +27,23 @@ export default ListItem;
 // 名前 = styled.要素名
 const Title = styled.text`
   text-decoration: underline;
-  justify-content: flex-start;
+  left:10px;
 `;
 
 const ListItemStyled = styled.div`
-  max-width: 600px;
   width:100%;
+  padding: 10px;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  border: 2px solid #eaeaea;
+  align-items: space-between;
+  border: 2px;
+  margin-left: 10px;
+  margin-rigth: 10px;
+
 `;
 
 const ButtonWrapper = styled.button`
-  padding: 10px;
-  right: 10px;
+  padding: 5px;
+  width: 200px;
   border-radius: 20px;
-  justify-content: flex-end;
 `;
