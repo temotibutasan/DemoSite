@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import {myFunctionJPYC} from "../pages/api/index2" 
 
 export interface  ListItemProps {
   name: string;
   key: number;
 };
 
-const sendJPYC = () => {}
+const sendJPYC = () => {
+  myFunctionJPYC();
+}
 
 const ListItem = (item: ListItemProps
   ) => {
