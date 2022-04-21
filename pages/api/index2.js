@@ -1,39 +1,12 @@
 import { ethers } from "ethers"
 "use strict";
 
-/*
-async function myFunction(){
-  console.log("テスト");
-  // A Web3Provider wraps a standard Web3 provider, which is
-  // what MetaMask injects as window.ethereum into each page
-  const provider = await new ethers.providers.Web3Provider(window.ethereum);
-
-  // MetaMask requires requesting permission to connect users accounts
-  const blocknumber = await provider.send("eth_requestAccounts", []);
-  
-  alert(blocknumber);
-}
-
-async function myFunction2(){
-  console.log("テスト2");
-  const provider = await new ethers.providers.Web3Provider(window.ethereum);
-  const addresses = await ethereum.request({method: 'eth_requestAccounts'});
-  
-  // The MetaMask plugin also allows signing transactions to
-  // send ether and pay to change state within the blockchain.
-  // For this, you need the account signer...
-  const signer = await provider.getSigner();
-  
-  alert(addresses[0]);
-}
-*/
-
 const testSpender ="0x62164A66E9673d65Ba3AC3BfabE229a1522fa01d";
 //JPYCのコントラクトアドレス。テストネット。Rinkebey
 //JPYC Test Net address
 const JPYCAddress = "0xbD9c419003A36F187DAf1273FCe184e1341362C0";
 
-export async function myFunctionJPYC(){
+export async function myFunctionJPYC(price){
   console.log("JPYC Start");
 
   // //よくわからないが、ブロックチェーンからデータを持ってきてくれるProviderを生成。
@@ -96,20 +69,12 @@ export async function myFunctionJPYC(){
 
   //Sendするときに戻り値もらうやつ
   let tx;
-/*  
-  //一応この送り方で送金できた。
-  tx = signer.sendTransaction({
-    to: testSpender,
-    value: ethers.utils.parseEther("0.01")
-  });
-  console.log("const tx = signer.sendTransaction");
-  */
 
   //今のコントラクト（JPYCContract）はProviderとつながっているが、Read OnlyなのでSignerとも接続
   const JPYCWithSigner = JPYCContract.connect(signer);
   console.log("JPYCWithSinger define");
 
-  const jpyc1 = ethers.utils.parseUnits("1", 18);
+  const jpyc1 = ethers.utils.parseUnits(price, 18);
 
   //metamaskからtestSpenderに送金
   tx = JPYCWithSigner.transfer(testSpender, jpyc1);
@@ -119,37 +84,5 @@ export async function myFunctionJPYC(){
   tx = JPYCWithSigner.approve( testSpender, jpyc1);
   console.log("approve JPYC by JPYCWithSigner to testSpender");
 
-  /*
-  //allowanceがうまく動かないのでコメントアウト。
-  balance = JPYCWithSigner.allowance(addresses[0], testSpender);
-  balanceDecimal = ethers.utils.formatEther(balance);
-  
-
-  console.log("allowance balance");
-  console.log(balance);
-  console.log("allowance balance Decimal");
-  console.log(balanceDecimal);
-  */
-
-/*
-  //送金した金額のうち、approveした金額をtransferFromで戻したかったけど、別のアドレスのメタマスクに接続しないと無理な気がする
-  const jpyc01 = ethers.utils.parseUnits("0.1", 18);
-  tx = JPYCWithSigner.transferFrom( addresses[0], testSpender, jpyc01);
-  console.log("approve JPYC by JPYCWithSigner to testSpender");
-*/
-  /*  JPYCContract.approve(testSpender, 100);
-
-  let allowanceAmount = JPYCContract.approve(testSpender, ethers.utils.parseEther('100'));
-  let allowanceAmountDecimal = ethers.utils.formatEther(allowanceAmount);
-  console.log(allowanceAmountDecimal);
-  */
-
-  console.log("JPYC End");
-  
+  console.log("JPYC End");  
 }
-
-// window.onload = async function(){
-//   //myFunction();
-//   //myFunction2();
-//   myFunctionJPYC();
-// }
