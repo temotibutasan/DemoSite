@@ -1,11 +1,11 @@
 import { TableRow, TableCell } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
-import Image from 'next/image'
 import {myFunctionJPYC} from "../pages/api/index2" 
 
 
 export interface  ListItemProps {
+  key: number;
   index: number;
   name: string;
   twitterId: string;
@@ -20,7 +20,7 @@ const ListItem = (item: ListItemProps
   ) => {
   return(
       <TableRow key={item.name}>
-        <TableCell component="th" scope="row" align="center">
+        <TableCell component="th" scope="row" >
           <img
           src={"2021_Twitter_logo_blue.png"}
           width={64} height={64}

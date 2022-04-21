@@ -3,7 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Account from "../components/Account";
 import ETHBalance from "../components/ETHBalance";
-import ListItmes from "../components/ListItmes";
+import ListItems from "../components/ListItems";
 import TokenBalance from "../components/TokenBalance";
 import useEagerConnect from "../hooks/useEagerConnect";
 
@@ -46,7 +46,7 @@ function Home() {
             <TokenBalance tokenAddress={JPYC_TOKEN_ADDRESS} symbol="JPYC" />
           </section>
         )}
-        <ListItmes />
+        <ListItems />
       </main>
 
       <style jsx>{`

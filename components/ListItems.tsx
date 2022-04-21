@@ -1,6 +1,6 @@
 import useListItem from "../hooks/useListItem";
-import ListItem from "./ListItme";
 import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import ListItem from "./ListItem";
 
 const useStyles = makeStyles({
   table: {
@@ -25,7 +25,7 @@ const ListItems = () => {
           </TableHead>
           <TableBody>
           {lists.map((item, i) => {
-            return <ListItem twitterId={""} totalJpyc={""} index={i} name={""} {...item}/>
+            return <ListItem key={i} twitterId={""} totalJpyc={""} index={i} name={""} {...item}/>
           })}
           </TableBody>
         </Table>
