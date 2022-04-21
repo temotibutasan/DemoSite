@@ -1,60 +1,53 @@
+import { TableRow, TableCell } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
+import Image from 'next/image'
 import {myFunctionJPYC} from "../pages/api/index2" 
 
+
 export interface  ListItemProps {
+  index: number;
   name: string;
-  key: number;
+  twitterId: string;
+  totalJpyc: string;
 };
 
 const sendJPYC = () => {
-  myFunctionJPYC();
+  myFunctionJPYC("1");
 }
 
 const ListItem = (item: ListItemProps
   ) => {
-  return (
-    <ListItemStyled key={'ListItem_$(item.key)' } >
-      <Title>応援者:{item.name}</Title>
-      <Coast>支援合計:10000JPYC</Coast>
-      <ButtonWrapper 
-        onClick={sendJPYC}
-      >
-      応援する
-      </ButtonWrapper>
-    </ListItemStyled>
-  );
+  return(
+      <TableRow key={item.name}>
+        <TableCell component="th" scope="row" align="center">
+          <img
+          src={"2021_Twitter_logo_blue.png"}
+          width={64} height={64}
+          loading="lazy"
+        />
+        </TableCell>
+        <TableCell align="left">
+          {item.name}
+        </TableCell>
+        <TableCell align="left">{"@xxxxx"}</TableCell>
+        <TableCell align="left">{"xxxxxxJPYC"}</TableCell>
+        <TableCell align="left">      
+          <ButtonWrapper 
+          onClick={sendJPYC}
+          >
+          支援する
+          </ButtonWrapper>
+        </TableCell>
+      </TableRow>
+ );
 };
 
 export default ListItem;
-
-// 名前 = styled.要素名
-const Title = styled.text`
-  text-decoration: underline;
-  left:10px;
-  justify-content: flex-start;
-`;
-// 名前 = styled.要素名
-const Coast = styled.text`
-  left:10px;
-`;
-
-const ListItemStyled = styled.div`
-  width:100%;
-  padding: 10px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: space-between;
-  border: 2px;
-  margin-left: 10px;
-  margin-rigth: 10px;
-
-`;
 
 const ButtonWrapper = styled.button`
   padding: 5px;
   width: 200px;
   left: 10px;
   border-radius: 20px;
-  justify-content: flex-end;
 `;

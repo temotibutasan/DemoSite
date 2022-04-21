@@ -1,37 +1,36 @@
 import useListItem from "../hooks/useListItem";
 import ListItem from "./ListItme";
-import styled from "styled-components";
+import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 800,
+  },
+});
 
 const ListItems = () => {
+  const classes = useStyles();
   const { lists } = useListItem();
   return (
-    <MainStyled>
-      {lists.length < 1 ? (
-        <div>no items</div>
-      ) : (
-        <ListItemsStyled>
-        {lists.map((item, i) => {
-          return <ListItem key={i} {...item}/>
-        })}
-      </ListItemsStyled>)}
-    </MainStyled>
+    <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>アイコン</TableCell>
+              <TableCell align="left">ユーザ名</TableCell>
+              <TableCell align="left">TwitterID</TableCell>
+              <TableCell align="left">合計支援額</TableCell>
+              <TableCell align="center" />
+            </TableRow>
+          </TableHead>
+          <TableBody>
+          {lists.map((item, i) => {
+            return <ListItem twitterId={""} totalJpyc={""} index={i} name={""} {...item}/>
+          })}
+          </TableBody>
+        </Table>
+      </TableContainer>
   );
 };
 
 export default ListItems;
-const ListItemsStyled = styled.div`
-display: flex;
-align-items: center;
-align-self:  center;
-justify-content: center;
-flex-wrap: wrap;
-background-color: antiquewhite;
-max-width: 800px;
-`;
-
-const MainStyled = styled.div`
-display: flex;
-align-items: center;
-align-self:  center;
-justify-content: center;
-`;
