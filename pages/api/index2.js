@@ -1,39 +1,12 @@
 import { ethers } from "ethers"
 "use strict";
 
-/*
-async function myFunction(){
-  console.log("テスト");
-  // A Web3Provider wraps a standard Web3 provider, which is
-  // what MetaMask injects as window.ethereum into each page
-  const provider = await new ethers.providers.Web3Provider(window.ethereum);
-
-  // MetaMask requires requesting permission to connect users accounts
-  const blocknumber = await provider.send("eth_requestAccounts", []);
-  
-  alert(blocknumber);
-}
-
-async function myFunction2(){
-  console.log("テスト2");
-  const provider = await new ethers.providers.Web3Provider(window.ethereum);
-  const addresses = await ethereum.request({method: 'eth_requestAccounts'});
-  
-  // The MetaMask plugin also allows signing transactions to
-  // send ether and pay to change state within the blockchain.
-  // For this, you need the account signer...
-  const signer = await provider.getSigner();
-  
-  alert(addresses[0]);
-}
-*/
-
 const testSpender ="0x62164A66E9673d65Ba3AC3BfabE229a1522fa01d";
 //JPYCのコントラクトアドレス。テストネット。Rinkebey
 //JPYC Test Net address
 const JPYCAddress = "0xbD9c419003A36F187DAf1273FCe184e1341362C0";
 
-export async function myFunctionJPYC(){
+export async function myFunctionJPYC(price){
   console.log("JPYC Start");
 
   // //よくわからないが、ブロックチェーンからデータを持ってきてくれるProviderを生成。
