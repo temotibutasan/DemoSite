@@ -6,6 +6,7 @@ import {myFunctionJPYC} from "../pages/api/index2"
 
 export interface  ListItemProps {
   key: number;
+  iconUrl: string;
   index: number;
   name: string;
   twitterId: string;
@@ -42,8 +43,8 @@ const ListItem = (item: ListItemProps
         <TableCell align="left">
           {item.name}
         </TableCell>
-        <TableCell align="left">{"@xxxxx"}</TableCell>
-        <TableCell align="left">{"xxxxxxJPYC"}</TableCell>
+        <TableCell align="left">{item.twitterId}</TableCell>
+        <TableCell align="left">{`${item.totalJpyc}JPYC`}</TableCell>
         <TableCell align="left">      
           <ButtonWrapper 
           onClick={sendJPYC}
