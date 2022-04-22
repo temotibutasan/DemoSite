@@ -16,14 +16,26 @@ const sendJPYC = () => {
   myFunctionJPYC("1");
 }
 
+const getImageSize= () => {
+  // 画像元サイズ
+  let width = 1034;
+  let height = 851;
+  let scale = 64 / 1034;
+  return {width: width* scale,height:height*scale};
+}
+
+
+
 const ListItem = (item: ListItemProps
   ) => {
+  const imageSize = getImageSize();
   return(
       <TableRow key={item.name}>
         <TableCell component="th" scope="row" >
           <img
           src={"2021_Twitter_logo_blue.png"}
-          width={64} height={64}
+          width={imageSize.width}
+          height={imageSize.height}
           loading="lazy"
         />
         </TableCell>
