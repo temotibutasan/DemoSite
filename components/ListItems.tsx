@@ -21,6 +21,8 @@ const ListItems = () => {
               <TableCell align="left">TwitterID</TableCell>
               <TableCell align="left">合計支援額</TableCell>
               <TableCell align="center" />
+              <TableCell align="center" />
+              <TableCell align="center" />
             </TableRow>
           </TableHead>
           <TableBody>
