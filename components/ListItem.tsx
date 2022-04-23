@@ -1,7 +1,7 @@
 import { TableRow, TableCell } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
-import {myFunctionJPYC} from "../pages/api/index2" 
+import {myFunctionJPYC,finishedProjectAllowance,CreateProject,getTotalJpyc} from "../pages/api/index2" 
 
 
 export interface  ListItemProps {
@@ -12,8 +12,21 @@ export interface  ListItemProps {
   totalJpyc: string;
 };
 
-const sendJPYC = () => {
-  myFunctionJPYC("1");
+const sendJPYC = async () => {
+  await myFunctionJPYC();
+  await CreateProject( 10, "toTwId1", "fromTwId1");  //応援ボタン押したとみなす
+  alert(`Send Jpyc`);
+}
+
+const finishedProject = async () => {
+  const result= await finishedProjectAllowance("toTwId1");
+  alert(`Finish Project! ${result}`);
+}
+
+const getJpyc = async () => {
+  //スマートコントラクトから情報を取得(
+  let  tx = await getTotalJpyc();
+  alert(`jpycAmount is ${tx}`);
 }
 
 const getImageSize= () => {
@@ -49,6 +62,20 @@ const ListItem = (item: ListItemProps
           onClick={sendJPYC}
           >
           支援する
+          </ButtonWrapper>
+        </TableCell>
+        <TableCell align="center">      
+          <ButtonWrapper 
+          onClick={finishedProject}
+          >
+            募集期間終了
+          </ButtonWrapper>
+        </TableCell>
+        <TableCell align="center">      
+          <ButtonWrapper 
+          onClick={getJpyc}
+          >
+            結果
           </ButtonWrapper>
         </TableCell>
       </TableRow>
