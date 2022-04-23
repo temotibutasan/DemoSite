@@ -1,8 +1,6 @@
 import { TableRow, TableCell } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
-import {myFunctionJPYC} from "../pages/api/index2" 
-
 
 export interface  ListItemProps {
   key: number;
@@ -11,24 +9,18 @@ export interface  ListItemProps {
   name: string;
   twitterId: string;
   totalJpyc: string;
+  showSendJpycDialog: ()=>void;
 };
 
-const sendJPYC = () => {
-  myFunctionJPYC("1");
-}
-
-const getImageSize= () => {
-  // 画像元サイズ
-  let width = 1034;
-  let height = 851;
-  let scale = 64 / 1034;
-  return {width: width* scale,height:height*scale};
-}
-
-
-
 const ListItem = (item: ListItemProps
-  ) => {
+  ) => {  
+  const getImageSize = () => {
+    // 画像元サイズ
+    let width = 1034;
+    let height = 851;
+    let scale = 64 / 1034;
+    return {width: width* scale,height:height*scale};
+  }
   const imageSize = getImageSize();
   return(
       <TableRow key={item.name}>
@@ -46,8 +38,9 @@ const ListItem = (item: ListItemProps
         <TableCell align="left">{item.twitterId}</TableCell>
         <TableCell align="left">{`${item.totalJpyc}JPYC`}</TableCell>
         <TableCell align="left">      
-          <ButtonWrapper 
-          onClick={sendJPYC}
+          <ButtonWrapper onClick={()=>{
+            item.showSendJpycDialog();
+            }}
           >
           支援する
           </ButtonWrapper>

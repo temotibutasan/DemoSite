@@ -1,7 +1,15 @@
+import { useEffect, useState } from "react";
+
+export interface  ListDataProps {
+  iconUrl: string;
+  name: string;
+  twitterId: string;
+  totalJpyc: string;
+};
 
 export default function useListItem(
 ) {
-  return {lists:[
+  const [lists, setLists] = useState<ListDataProps[]>([
     {
       iconUrl:"",
       name: "名前１",
@@ -44,5 +52,7 @@ export default function useListItem(
       twitterId: "@aaaaaa",
       totalJpyc:"100000",
     },
-  ]};
+  ]);
+
+  return lists;
 }
