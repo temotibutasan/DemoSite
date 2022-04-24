@@ -201,7 +201,7 @@ export async function projectAllowance( inputToTwId){
 }
 
 //☆期限が来たことを示す仮想ボタンを押したら実行したい。
-async function projectFinish( inputToTwId, targetAmount){
+export async function projectFinish( inputToTwId, targetAmount){
   //期限が来たので、プロジェクト終了をスマートコントラクトに通知
   let tx = await JpycSupportWithSinger.projectFinish( inputToTwId, targetAmount);
   console.log("Finish Project!");
