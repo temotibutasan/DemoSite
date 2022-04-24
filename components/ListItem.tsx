@@ -1,22 +1,17 @@
 import { TableRow, TableCell } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
-import {myFunctionJPYC,finishedProjectAllowance,CreateProject,projectFinish} from "../pages/api/index2" 
-
+import {finishedProjectAllowance,projectFinish} from "../pages/api/index2" 
 
 export interface  ListItemProps {
   key: number;
+  iconUrl: string;
   index: number;
   name: string;
   twitterId: string;
   totalJpyc: string;
+  showSendJpycDialog: (to:string)=>void;
 };
-
-const sendJPYC = async () => {
-  await myFunctionJPYC();
-  await CreateProject( 10, "toTwId1", "fromTwId1");  //応援ボタン押したとみなす
-  alert(`Send Jpyc`);
-}
 
 const finishedProject = async () => {
   const result= await projectFinish("toTwId1", 0);;
@@ -37,10 +32,15 @@ const getImageSize= () => {
   return {width: width* scale,height:height*scale};
 }
 
-
-
 const ListItem = (item: ListItemProps
-  ) => {
+  ) => {  
+  const getImageSize = () => {
+    // 画像元サイズ
+    let width = 1034;
+    let height = 851;
+    let scale = 64 / 1034;
+    return {width: width* scale,height:height*scale};
+  }
   const imageSize = getImageSize();
   return(
       <TableRow key={item.name}>
@@ -55,11 +55,12 @@ const ListItem = (item: ListItemProps
         <TableCell align="left">
           {item.name}
         </TableCell>
-        <TableCell align="left">{"@xxxxx"}</TableCell>
-        <TableCell align="left">{"xxxxxxJPYC"}</TableCell>
+        <TableCell align="left">{item.twitterId}</TableCell>
+        <TableCell align="left">{`${item.totalJpyc}JPYC`}</TableCell>
         <TableCell align="left">      
-          <ButtonWrapper 
-          onClick={sendJPYC}
+          <ButtonWrapper onClick={()=>{
+            item.showSendJpycDialog(item.twitterId);
+            }}
           >
           支援する
           </ButtonWrapper>

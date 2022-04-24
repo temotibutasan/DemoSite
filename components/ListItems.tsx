@@ -1,4 +1,4 @@
-import useListItem from "../hooks/useListItem";
+import useListItem, { ListDataProps } from "../hooks/useListItem";
 import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import ListItem from "./ListItem";
 
@@ -8,9 +8,14 @@ const useStyles = makeStyles({
   },
 });
 
-const ListItems = () => {
+export interface  ListItemsProps {
+  showSendJpycDialog: (to:string) => void;
+};
+
+
+const ListItems = (info:ListItemsProps) => {
   const classes = useStyles();
-  const { lists } = useListItem();
+  const lists:ListDataProps[] = useListItem();
   return (
     <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
@@ -27,7 +32,7 @@ const ListItems = () => {
           </TableHead>
           <TableBody>
           {lists.map((item, i) => {
-            return <ListItem key={i} twitterId={""} totalJpyc={""} index={i} name={""} {...item}/>
+            return <ListItem showSendJpycDialog={info.showSendJpycDialog} key={i} twitterId={""} totalJpyc={""} index={i} name={""} {...item}/>
           })}
           </TableBody>
         </Table>
