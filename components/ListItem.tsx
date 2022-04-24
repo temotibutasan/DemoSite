@@ -26,7 +26,7 @@ const finishedProject = async () => {
 const getJpyc = async () => {
   //スマートコントラクトから情報を取得(
   const result= await finishedProjectAllowance("toTwId1");
-  alert(`Finish Project! ${result}`);
+  alert(`Finish Project allowance! ${result}`);
 }
 
 const getImageSize= () => {
