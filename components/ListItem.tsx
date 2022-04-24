@@ -1,6 +1,7 @@
 import { TableRow, TableCell } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
+import {finishedProjectAllowance,projectFinish} from "../pages/api/index2" 
 
 export interface  ListItemProps {
   key: number;
@@ -11,6 +12,25 @@ export interface  ListItemProps {
   totalJpyc: string;
   showSendJpycDialog: (to:string)=>void;
 };
+
+const finishedProject = async () => {
+  const result= await projectFinish("toTwId1", 0);;
+  alert(`Finish Project! ${result}`);
+}
+
+const getJpyc = async () => {
+  //スマートコントラクトから情報を取得(
+  const result= await finishedProjectAllowance("toTwId1");
+  alert(`Finish Project allowance! ${result}`);
+}
+
+const getImageSize= () => {
+  // 画像元サイズ
+  let width = 1034;
+  let height = 851;
+  let scale = 64 / 1034;
+  return {width: width* scale,height:height*scale};
+}
 
 const ListItem = (item: ListItemProps
   ) => {  
@@ -44,6 +64,20 @@ const ListItem = (item: ListItemProps
           >
           支援する
           </ButtonWrapper>
+        </TableCell>
+        <TableCell align="center">      
+          <button
+          onClick={finishedProject}
+          >
+            募集期間終了
+          </button>
+        </TableCell>
+        <TableCell align="center">      
+          <button 
+          onClick={getJpyc}
+          >
+            結果
+          </button>
         </TableCell>
       </TableRow>
  );

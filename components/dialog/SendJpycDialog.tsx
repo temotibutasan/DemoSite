@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions } from '@material-ui/core';
 import * as React from 'react';
-import {myFunctionJPYC} from "../../pages/api/index2" 
+import {myFunctionJPYC,CreateProject} from "../../pages/api/index2" 
 
 export interface sendJPYCDialogProps {
   sendTo: string;
@@ -18,8 +18,10 @@ class sendJPYCDialog extends React.Component<sendJPYCDialogProps,sendJPYCDialogS
     this.state = {jpyc: "1"};
   }
 
-  onSendJpyc=()=>{
-    myFunctionJPYC(this.state.jpyc);
+  onSendJpyc=async ()=>{
+    await myFunctionJPYC();
+    await CreateProject( this.state.jpyc, "toTwId1", "fromTwId1");  //応援ボタン押したとみなす
+    alert(`Send Jpyc`);
     this.props.onApprove();  
   }
 
