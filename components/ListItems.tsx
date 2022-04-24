@@ -9,7 +9,7 @@ const useStyles = makeStyles({
 });
 
 export interface  ListItemsProps {
-  showSendJpycDialog: () => void;
+  showSendJpycDialog: (to:string) => void;
 };
 
 

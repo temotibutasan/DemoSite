@@ -3,7 +3,7 @@ import * as React from 'react';
 import {myFunctionJPYC} from "../../pages/api/index2" 
 
 export interface sendJPYCDialogProps {
-  twitter: string;
+  sendTo: string;
   onApprove: ()=>void;
   onCancel: ()=>void;
 };
@@ -23,15 +23,19 @@ class sendJPYCDialog extends React.Component<sendJPYCDialogProps,sendJPYCDialogS
     this.props.onApprove();  
   }
 
+  onChangeJpyc=(str)=>{
+    this.setState({jpyc:str.target.value});
+  }
+
   render() {
     return (
         <div>
-          <DialogTitle>{`@xxxxxxxを支援します`}</DialogTitle>
+          <DialogTitle>{`${this.props.sendTo}を支援します`}</DialogTitle>
           <DialogContent>
             <DialogContentText>
               支援する金額(JPYC)を入力してください
             </DialogContentText>
-            <input type="number" id="tentacles" name="tentacles" min="1" max="1000" />
+            <input type="number" id="tentacles" name="tentacles" min="1" max="1000" onChange={this.onChangeJpyc}/>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.props.onCancel}>キャンセル</Button>

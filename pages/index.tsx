@@ -42,7 +42,8 @@ const customStyles = {
 Modal.setAppElement('#__next')
 
 function App() {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
+  const [sendJpycTo, setsendJpycTo] = useState("");
   const { account, library } = useWeb3React();
   const triedToEagerConnect = useEagerConnect();
   const isConnected = typeof account === "string" && !!library;
@@ -50,6 +51,12 @@ function App() {
   // モーダルを開く処理
   const openModal = () => {
     setShow(true);
+  }
+
+  // モーダルを開く処理
+  const showSendJpycModalDialog = (sendTo: string) => {
+    setShow(true);
+    setsendJpycTo(sendTo);
   }
 
   const afterOpenModal = () => {
@@ -90,7 +97,7 @@ function App() {
             <TokenBalance tokenAddress={JPYC_TOKEN_ADDRESS} symbol="JPYC" />
           </section>
         )}
-        <ListItems showSendJpycDialog={openModal} />
+        <ListItems showSendJpycDialog={showSendJpycModalDialog} />
       </main>
       {show && (
         <Modal
@@ -103,7 +110,7 @@ function App() {
             // スタイリングを定義
             style={customStyles}
           >
-            <SendJpycDialog onCancel={closeModal} onApprove={closeModal} />
+            <SendJpycDialog sendTo={sendJpycTo} onCancel={closeModal} onApprove={closeModal} />
           </Modal>
         )
       }

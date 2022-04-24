@@ -9,7 +9,7 @@ export interface  ListItemProps {
   name: string;
   twitterId: string;
   totalJpyc: string;
-  showSendJpycDialog: ()=>void;
+  showSendJpycDialog: (to:string)=>void;
 };
 
 const ListItem = (item: ListItemProps
@@ -39,7 +39,7 @@ const ListItem = (item: ListItemProps
         <TableCell align="left">{`${item.totalJpyc}JPYC`}</TableCell>
         <TableCell align="left">      
           <ButtonWrapper onClick={()=>{
-            item.showSendJpycDialog();
+            item.showSendJpycDialog(item.twitterId);
             }}
           >
           支援する
