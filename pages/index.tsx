@@ -9,13 +9,13 @@ import useEagerConnect from "../hooks/useEagerConnect";
 import Modal from 'react-modal';
 import { useState } from 'react';
 import SendJpycDialog from "../components/dialog/SendJpycDialog";
-import {myFunctionJPYC} from "../pages/api/index2" 
-
+import { ethers } from "ethers";
+import useJpycSupportContract, { testSmartContract } from "../hooks/useJpycSupportContract";
+import useJpycContract from "../hooks/useJpycContract";
 
 const DAI_TOKEN_ADDRESS = "0x6b175474e89094c44da98b954eedeac495271d0f";
 const JPYC_TOKEN_ADDRESS = "0xbD9c419003A36F187DAf1273FCe184e1341362C0";
 const MATIC_TOKEN_ADDRESS = "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0";
-
 
 // スタイリング
 const customStyles = {
@@ -46,17 +46,30 @@ function App() {
   const [sendJpycTo, setsendJpycTo] = useState("");
   const { account, library } = useWeb3React();
   const triedToEagerConnect = useEagerConnect();
+
+  // sol
+  const JSContract = useJpycSupportContract();
+  const JContract = useJpycContract();
+
+  // 連係情報
+  // metamask
   const isConnected = typeof account === "string" && !!library;
+  // twitter
+  const [tiwtterConnected, setTiwtterConnected] = useState(true);
+
+  const testClick = async () => {
+    // 10, "toTwId1", 
+    const inputYen = 10;
+    const inputToTwId = "toTwId1";
+    const inputFromTwId = "fromTwId1";
+    const jpyc = ethers.utils.parseUnits(String(inputYen), 18);
+    let tx = await JContract.approve( testSmartContract, jpyc);
+    await JSContract.createProject( inputToTwId, inputFromTwId, JSContract.address, jpyc);
+  }
 
   // モーダルを開く処理
   const openModal = () => {
     setShow(true);
-  }
-
-  // モーダルを開く処理
-  const showSendJpycModalDialog = (sendTo: string) => {
-    setShow(true);
-    setsendJpycTo(sendTo);
   }
 
   const afterOpenModal = () => {
@@ -66,6 +79,15 @@ function App() {
   // モーダルを閉じる処理
   const closeModal = () => {
     setShow(false);
+  }
+
+  // モーダルを開く処理
+  const showSendJpycModalDialog = (sendTo: string) => {
+    setShow(true);
+    setsendJpycTo(sendTo);
+  }
+  const sendJpyc = async () => {
+    alert(`Send Jpyc`);
   }
 
   return (
@@ -89,7 +111,12 @@ function App() {
         <h1>
           勝手に応援
         </h1>
-
+        {/** twitter連携 */}
+        {tiwtterConnected && (
+          <section>
+           Twitter連携ID:@xxxxx 
+          </section>
+        )}
         {/** 接続情報 */}
         {isConnected && (
           <section>
@@ -97,6 +124,7 @@ function App() {
             <TokenBalance tokenAddress={JPYC_TOKEN_ADDRESS} symbol="JPYC" />
           </section>
         )}
+        <button onClick={testClick}>検証用</button>
         <ListItems showSendJpycDialog={showSendJpycModalDialog} />
       </main>
       {show && (
@@ -110,7 +138,7 @@ function App() {
             // スタイリングを定義
             style={customStyles}
           >
-            <SendJpycDialog sendTo={sendJpycTo} onCancel={closeModal} onApprove={closeModal} />
+            <SendJpycDialog sendTo={sendJpycTo} onCancel={closeModal} onApprove={sendJpyc} />
           </Modal>
         )
       }
