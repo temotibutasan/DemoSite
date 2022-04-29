@@ -31,7 +31,7 @@ class sendJPYCDialog extends React.Component<sendJPYCDialogProps,sendJPYCDialogS
 
   render() {
     return (
-        <div>
+        <Dialog open={true} onClose={this.props.onCancel}>
           <DialogTitle>{`${this.props.sendTo}を支援します`}</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -43,7 +43,7 @@ class sendJPYCDialog extends React.Component<sendJPYCDialogProps,sendJPYCDialogS
             <Button onClick={this.props.onCancel}>キャンセル</Button>
             <Button onClick={this.onSendJpyc}>支援</Button>
           </DialogActions>
-        </div>
+        </Dialog>
     );
   }
 }

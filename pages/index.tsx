@@ -27,14 +27,8 @@ const customStyles = {
   },
 
   content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    width                 : '500px',
-    height                : '300px',
-    transform             : 'translate(-50%, -50%)'
+    width                 : '1px',
+    height                : '1px',
   }
 };
 
@@ -55,7 +49,7 @@ function App() {
   // metamask
   const isConnected = typeof account === "string" && !!library;
   // twitter
-  const [tiwtterConnected, setTiwtterConnected] = useState(true);
+  const [tiwtterID, setTiwtterID] = useState("未連携");
 
   const testClick = async () => {
     // 10, "toTwId1", 
@@ -63,10 +57,10 @@ function App() {
     const inputToTwId = "toTwId1";
     const inputFromTwId = "fromTwId1";
     const jpyc = ethers.utils.parseUnits(String(inputYen), 18);
-    let tx = await JContract.approve( testSmartContract, jpyc);
-    await JSContract.createProject( inputToTwId, inputFromTwId, JSContract.address, jpyc);
+    let tx = await JContract.approve(testSmartContract, jpyc);
+    await JSContract.createProject(inputToTwId, inputFromTwId, JSContract.address, jpyc);
   }
-
+  
   // モーダルを開く処理
   const openModal = () => {
     setShow(true);
@@ -112,11 +106,11 @@ function App() {
           勝手に応援
         </h1>
         {/** twitter連携 */}
-        {tiwtterConnected && (
+        {
           <section>
-           Twitter連携ID:@xxxxx 
+            <h2>{`Twitter連携ID : ${tiwtterID}`}</h2>
           </section>
-        )}
+        }
         {/** 接続情報 */}
         {isConnected && (
           <section>
@@ -137,6 +131,8 @@ function App() {
             onRequestClose={closeModal}
             // スタイリングを定義
             style={customStyles}
+
+            childern={}
           >
             <SendJpycDialog sendTo={sendJpycTo} onCancel={closeModal} onApprove={sendJpyc} />
           </Modal>
