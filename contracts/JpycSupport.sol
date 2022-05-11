@@ -24,49 +24,50 @@ interface IERC20 {
 contract JPYC_Support {
 
     //上で定義したERC20規格を呼び出すための仕組み(インタフェース)です
-    IERC20 public jpyc;
+    IERC20 public jpycInterface;
 
     //貯金箱持ち主のアドレスです
     address owner;
 
-    //Polygon Network(matic)のJPYC
-    //jpyc = IERC20(0x6AE7Dfc73E0dDE2aa99ac063DcF7e8A63265108c); コメントアウト中
-    //Ethereum NetworkのJPYC
-    //jpyc = IERC20(0x2370f9d504c7a6e775bf6e14b3f12846b594cd53); コメントアウト中     
-    //xDai NetworkのJPYC
-    //jpyc = IERC20(0x417602f4fbdd471A431Ae29fB5fe0A681964C11b);  コメントアウト中
-
     constructor(address _jpyc_address) {
-         //スマートコントラクトの作成者を貯金箱の持ち主に設定します
          owner = msg.sender;
-         jpyc = IERC20(_jpyc_address);
+         jpycInterface = IERC20(_jpyc_address);
     } 
 
     //名前を確認する関数です
     function getname() public view returns (string memory){
-        return jpyc.name();
+        return jpycInterface.name();
     }
 
     //シンボル(JPYC)を確認する関数です
     function getsymbol() public view returns (string memory){
-        return jpyc.symbol();
+        return jpycInterface.symbol();
     }
 
     //貯金箱に入っている金額を確認する関数です
     function jpycAmount() public view returns (uint) {
-        return jpyc.balanceOf(address(this)) / 10 ** 18;
+        return jpycInterface.balanceOf(address(this)) / 10 ** 18;
     }
 
     //貯金箱からの送金を許可する関数です
     function approveJpycFromContract() public {
-        jpyc.approve( address(this) , jpyc.balanceOf(address(this)) );
+        jpycInterface.approve( address(this) , jpycInterface.balanceOf(address(this)) );
     }
 
     //貯金箱からの出金をする関数です
     function withdraw_jpyc() public {
         //貯金箱の持ち主だけが呼び出せるように『require』で指定しています
         require(msg.sender == owner);
-        jpyc.transferFrom(address(this) , owner , jpyc.balanceOf(address(this)) );
+        jpycInterface.transferFrom(address(this) , owner , jpycInterface.balanceOf(address(this)) );
+    }
+
+    //
+    function transfer(address recipient, uint256 amount)
+        internal
+        returns (bool)
+    {
+        jpycInterface.transfer(recipient, amount);
+        return true;
     }
     
     //構造体

@@ -131,8 +131,6 @@ function App() {
             onRequestClose={closeModal}
             // スタイリングを定義
             style={customStyles}
-
-            childern={}
           >
             <SendJpycDialog sendTo={sendJpycTo} onCancel={closeModal} onApprove={sendJpyc} />
           </Modal>
